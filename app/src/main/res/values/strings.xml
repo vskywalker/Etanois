@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Etanois</string>
+    <string name="gasolina">Gas price in liters</string>
+    <string name="etanol">Ethan Price in liters</string>
+    <string name="melhorOpcao">Best Choice:</string>
+    <string name="gas">Gas</string>
+    <string name="eta">Ethan</string>
+</resources>
