@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.NumberFormat;
+
 public class MainActivity extends AppCompatActivity {
+    private NumberFormat format;
     private SeekBar seekGasolina;
     private SeekBar seekEtanol;
     private TextView textEscolha;
@@ -23,12 +26,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        format = NumberFormat.getCurrencyInstance();
+
         seekGasolina = (SeekBar) findViewById(R.id.seekGasolina);
         seekEtanol = (SeekBar) findViewById(R.id.seekEtanol);
         textEscolha = (TextView) findViewById(R.id.textEscolha);
         textValorEtanol = (TextView) findViewById(R.id.textValorEtanol);
         textValorGasolina = (TextView) findViewById(R.id.textValorGasolina);
         imageCombustivel = (ImageView) findViewById(R.id.imageCombustivel);
+
+        textValorEtanol.setText(format.format(0.0));
+        textValorGasolina.setText(format.format(0.0));
 
         seekGasolina.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -69,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculaValores(){
-        valorEtanol = seekEtanol.getProgress();
-        valorGasolina = seekGasolina.getProgress();
-        textValorGasolina.setText(Double.toString(valorGasolina));
-        textValorEtanol.setText(Double.toString(valorEtanol));
+        valorEtanol = seekEtanol.getProgress() /100.0;
+        valorGasolina = seekGasolina.getProgress() / 100.0;
+        textValorGasolina.setText(format.format(valorGasolina));
+        textValorEtanol.setText(format.format(valorEtanol));
 
         boolean gasolina = (valorEtanol / valorGasolina >= 0.7);
 
